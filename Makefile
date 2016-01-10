@@ -1,10 +1,12 @@
 all: clean compile
 
+deploy: clean
+	./build deploy
+
 compile:
-	elm make --output build/elm.js src/DominionApp.elm
-	cp -r static/* build/
+	./build build
 
 clean:
-	rm -rf build/*
+	./build clean
 
 
