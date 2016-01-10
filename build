@@ -36,7 +36,6 @@ deploy() {
 
   build
   rm -rf "$DEPLOY_DIR/*"
-  cp -r $ASSETS_DIR/* "$DEPLOY_DIR/"
   cp -r $BUILD_DIR/* "$DEPLOY_DIR/"
 
   pushd "$DEPLOY_DIR" > /dev/null
@@ -50,6 +49,7 @@ build() {
   echo -e "**** BUILDING THE PROJECT ****"
   mkdir -p _build
   elm make --output "$BUILD_DIR/elm.js" "$MAIN_FILE"
+  cp -r $ASSETS_DIR/* "$BUILD_DIR/"
 }
 
 pushd $PROJECT_DIR > /dev/null

@@ -31,7 +31,7 @@ type Action = NoOp
 -- My functions
 --
 init : (Model, Effects Action)
-init = ("Hello World", Effects.none)
+init = ("Hello World of elm!!!", Effects.none)
 
 update : Action -> Model -> (Model, Effects Action)
 update action model = 
