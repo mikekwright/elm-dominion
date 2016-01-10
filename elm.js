@@ -10406,7 +10406,7 @@ Elm.DominionApp.make = function (_elm) {
    var _op = {};
    var view = F2(function (address,model) {    return $Html.text(model);});
    var update = F2(function (action,model) {    var _p0 = action;return {ctor: "_Tuple2",_0: model,_1: $Effects.none};});
-   var init = {ctor: "_Tuple2",_0: "Hello World",_1: $Effects.none};
+   var init = {ctor: "_Tuple2",_0: "Hello World of elm!!!",_1: $Effects.none};
    var NoOp = {ctor: "NoOp"};
    var app = $StartApp.start({init: init,view: view,update: update,inputs: _U.list([])});
    var main = app.html;
