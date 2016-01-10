@@ -52,6 +52,11 @@ build() {
   cp -r $ASSETS_DIR/* "$BUILD_DIR/"
 }
 
+watch() {
+  echo -e "**** STARTING WATCH ****"
+  "node_modules/.bin/watch" "make" $SRC_DIR $ASSETS_DIR
+}
+
 pushd $PROJECT_DIR > /dev/null
 
 
@@ -61,6 +66,8 @@ elif [[ $1 = 'build' ]]; then
   build
 elif [[ $1 = 'deploy' ]]; then
   deploy
+elif [[ $1 = 'watch' ]]; then
+  watch
 elif [[ $# -ge 1 ]]; then
   echo "Invalid option specified"
 else

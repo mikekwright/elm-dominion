@@ -1,5 +1,8 @@
 all: clean compile
 
+watch:
+	./build watch
+
 deploy: clean
 	./build deploy
 
