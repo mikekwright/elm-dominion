@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "summary": "This project is the game dominion, written in elm (go functional!!!)",
+    "repository": "https://github.com/wrightcoder/project.git",
+    "license": "MIT",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "elm-lang/core": "3.0.0 <= v < 4.0.0"
+    },
+    "elm-version": "0.16.0 <= v < 0.17.0"
+}
+
