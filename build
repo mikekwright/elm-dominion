@@ -23,6 +23,7 @@ init_deploy() {
   pushd "$DEPLOY_DIR" > /dev/null
   git init .
   git remote add origin "$gitrepo"
+  git checkout -b gh-pages
   popd > /dev/null
 }
 
@@ -34,6 +35,7 @@ deploy() {
   fi
 
   build
+  rm -rf "$DEPLOY_DIR/*"
   cp -r $ASSETS_DIR/* "$DEPLOY_DIR/"
   cp -r $BUILD_DIR/* "$DEPLOY_DIR/"
 
