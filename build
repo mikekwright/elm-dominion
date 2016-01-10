@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# vi: ft=sh
+set -e
+
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
+MAIN_FILE=src/DominionApp.elm
+BUILD_DIR=_build
+DEPLOY_DIR=_deploy
+ASSETS_DIR=static
+SRC_DIR=src
+
+clean() {
+  echo -e "**** CLEANING THE PROJECT ****"
+  rm -rf "$BUILD_DIR/*"
+}
+
+init_deploy() {
+  echo -e "Setting up deploy for first time, what git repo should be used?\n"
+  read gitrepo
+  echo -e "Deploying to repo - $gitrepo"
+
+  mkdir -p "$DEPLOY_DIR"
+  pushd "$DEPLOY_DIR" > /dev/null
+  git init .
+  git remote add origin "$gitrepo"
+  popd > /dev/null
+}
+
+deploy() {
+  echo -e "**** DEPLOYING THE PROJECT ****"
+  local gitrepo=
+  if [ ! -d "$DEPLOY_DIR" ]; then
+    init_deploy
+  fi
+
+  build
+  cp -r $ASSETS_DIR/* "$DEPLOY_DIR/"
+  cp -r $BUILD_DIR/* "$DEPLOY_DIR/"
+
+  pushd "$DEPLOY_DIR" > /dev/null
+  git add .
+  git commit -m "Running automated deploy"
+  git push --force
+  popd > /dev/null
+}
+
+build() {
+  echo -e "**** BUILDING THE PROJECT ****"
+  mkdir -p _build
+  elm make --output "$BUILD_DIR/elm.js" "$MAIN_FILE"
+}
+
+pushd $PROJECT_DIR > /dev/null
+
+
+if [[ $1 = 'clean' ]]; then
+  clean
+elif [[ $1 = 'build' ]]; then
+  build
+elif [[ $1 = 'deploy' ]]; then
+  deploy
+elif [[ $# -ge 1 ]]; then
+  echo "Invalid option specified"
+else
+  build
+fi
+
+popd > /dev/null
+
