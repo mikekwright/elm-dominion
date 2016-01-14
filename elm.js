@@ -10387,11 +10387,11 @@ Elm.StartApp.make = function (_elm) {
    var Config = F4(function (a,b,c,d) {    return {init: a,update: b,view: c,inputs: d};});
    return _elm.StartApp.values = {_op: _op,start: start,Config: Config,App: App};
 };
-Elm.DominionApp = Elm.DominionApp || {};
-Elm.DominionApp.make = function (_elm) {
+Elm.Dominion = Elm.Dominion || {};
+Elm.Dominion.make = function (_elm) {
    "use strict";
-   _elm.DominionApp = _elm.DominionApp || {};
-   if (_elm.DominionApp.values) return _elm.DominionApp.values;
+   _elm.Dominion = _elm.Dominion || {};
+   if (_elm.Dominion.values) return _elm.Dominion.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -10400,16 +10400,44 @@ Elm.DominionApp.make = function (_elm) {
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var view = F2(function (address,model) {    return $Html.text(model);});
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      switch (_p0.ctor)
+      {case "NoOp": return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
+         case "Start": return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
+         case "Save": return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
+         default: return {ctor: "_Tuple2",_0: model,_1: $Effects.none};}
+   });
+   var game = "Hello";
+   var init = {ctor: "_Tuple2",_0: game,_1: $Effects.none};
+   var NoOp = {ctor: "NoOp"};
+   var End = {ctor: "End"};
+   var Save = {ctor: "Save"};
+   var Start = {ctor: "Start"};
+   return _elm.Dominion.values = {_op: _op,Start: Start,Save: Save,End: End,NoOp: NoOp,game: game,init: init,update: update,view: view};
+};
+Elm.App = Elm.App || {};
+Elm.App.make = function (_elm) {
+   "use strict";
+   _elm.App = _elm.App || {};
+   if (_elm.App.values) return _elm.App.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Dominion = Elm.Dominion.make(_elm),
+   $Effects = Elm.Effects.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm),
    $StartApp = Elm.StartApp.make(_elm),
    $Task = Elm.Task.make(_elm);
    var _op = {};
-   var view = F2(function (address,model) {    return $Html.text(model);});
-   var update = F2(function (action,model) {    var _p0 = action;return {ctor: "_Tuple2",_0: model,_1: $Effects.none};});
-   var init = {ctor: "_Tuple2",_0: "Hello World of elm!!!",_1: $Effects.none};
-   var NoOp = {ctor: "NoOp"};
-   var app = $StartApp.start({init: init,view: view,update: update,inputs: _U.list([])});
+   var app = $StartApp.start({init: $Dominion.init,inputs: _U.list([]),update: $Dominion.update,view: $Dominion.view});
    var main = app.html;
    var tasks = Elm.Native.Task.make(_elm).performSignal("tasks",app.tasks);
-   return _elm.DominionApp.values = {_op: _op,app: app,main: main,NoOp: NoOp,init: init,update: update,view: view};
+   return _elm.App.values = {_op: _op,app: app,main: main};
 };
