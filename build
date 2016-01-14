@@ -3,7 +3,7 @@
 set -e
 
 PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
-MAIN_FILE=src/DominionApp.elm
+MAIN_FILE=src/App.elm
 BUILD_DIR=_build
 DEPLOY_DIR=_deploy
 ASSETS_DIR=static
@@ -54,7 +54,7 @@ build() {
 
 watch() {
   echo -e "**** STARTING WATCH ****"
-  "node_modules/.bin/watch" "make" $SRC_DIR $ASSETS_DIR
+  "node_modules/.bin/watch" "make compile" $SRC_DIR $ASSETS_DIR
 }
 
 pushd $PROJECT_DIR > /dev/null

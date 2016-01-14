@@ -1,4 +1,4 @@
-all: clean compile
+all: watch
 
 watch:
 	./build watch

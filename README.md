@@ -25,4 +25,8 @@ Since this was my first project I used a guide that layed out the structure foun
 
 
 
+## Items to mark while learning
+
+1. [Elm Package](http://package.elm-lang.org/)    
+
 
