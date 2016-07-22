@@ -11,21 +11,27 @@ import Html exposing (Html)
 -- Start by defining the models the app will use
 --
 
-type alias Dominion = String --
---  score:Float,
---  name:String
---}
-
+type alias Dominion = {
+  score:Float,
+  name:String
+}
 
 type Action = Start | Save | End | NoOp
+
+updateModelName : Dominion -> String -> Dominion
+updateModelName model newName =
+  { score = model.score, name = newName }
+
+updateModelScore : Dominion -> Float -> Dominion
+updateModelScore model newScore =
+  { score = newScore, name = model.name }
 
 --
 --  Create the update mechanism for the given view
 --
 
-game : Dominion
---game = { score = 0.0, name = "My Game" }
-game = "Hello"
+game : { score: Float, name: String }
+game = { score = 0.0, name = "My Game" }
 
 init : (Dominion, Effects Action)
 init = (game, Effects.none)
@@ -34,35 +40,11 @@ update : Action -> Dominion -> (Dominion, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
-    Start -> (model, Effects.none)
+    Start -> (updateModelScore model 0, Effects.none)
     Save -> (model, Effects.none)
-    End -> (model, Effects.none)
+    End -> (updateModelName model "All Done", Effects.none)
 
 view : Address Action -> Dominion -> Html
-view address model = Html.text model
+view address model = Html.text model.name
 
---
--- StartApp boilerplate
---
---app =
---  StartApp.start { init = init, view = view, update = update, inputs = [] }
---
---main : Signal Html
---main =
---  app.html
-
---port tasks : Signal (Task Never ())
---port tasks =
---  app.tasks
-
---
--- My type declarations
---
---type alias Model = String
---
---type Action = NoOp
-
---
--- My functions
---
 
